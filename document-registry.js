@@ -1,71 +1,71 @@
 $(document).ready(function () {
-  //const documentRegistryContractAddress = "0xbe6600d396b9c264c8f1f0d84536bb182a5dc222";
-  const documentRegistryContractAddress = "0x3a42e020c27f31bfe39c2a66739ebfe00d9a531c";
+  
+  const documentRegistryContractAddress = "0x30e75711c77b857ef8bd27ec67e6b6c29500af37";
   const documentRegistryContractABI = 
       [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "hash",
-				"type": "string"
-			}
-		],
-		"name": "add",
-		"outputs": [
-			{
-				"name": "dateAdded",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "getDocument",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getDocumentsCount",
-		"outputs": [
-			{
-				"name": "length",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "hash",
+                    "type": "string"
+                }
+            ],
+            "name": "add",
+            "outputs": [
+                {
+                    "name": "dateAdded",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "uint256"
+                }
+            ],
+            "name": "getDocument",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "string"
+                },
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "getDocumentsCount",
+            "outputs": [
+                {
+                    "name": "length",
+                    "type": "uint256"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }
+      ];
   
   const IPFS = window.IpfsApi('localhost', '5001');
   //TKH
@@ -128,13 +128,17 @@ function uploadDocument() {
     let fileBuffer = Buffer.from(fileReader.result);
     let contract = web3.eth.contract(documentRegistryContractABI).at(documentRegistryContractAddress);
     IPFS.files.add(fileBuffer, (err, result) => {
-      if (err)
-        return showError(err);
+      if (err) {
+          return showError(err);
+      }
       if (result) {
         let ipfsHash = result[0].hash;
+        alert(ipfsHash);
         contract.add(ipfsHash, function(err,txHash) {
-          if (err)
-            return showError(err);
+            if (err) {
+                return showError(err);
+            }
+            
           showInfo(`Document ${ipfsHash} <b>successfully added</b> to the registry. Txn hash: ${txHash}`);
         })        
       }
