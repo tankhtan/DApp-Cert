@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 
@@ -17,6 +17,8 @@
 <body>
 <header id="menu">
     <a href="#" id="linkHome">Home</a>
+    <a href="#" id="linkCreateRecord">Create Record</a>
+    <a href="#" id="linkGetRecords">View Records</a>
     <a href="#" id="linkSubmitDocument">Submit Document</a>
     <a href="#" id="linkGetDocuments">View Documents</a>
 </header>
@@ -29,28 +31,46 @@
     <section id="errorBox"><header>x</header><p>Error</p></section>
 
     <section id="viewHome">
-        <h1>Document Registry</h1>
-        Welcome to the "Document Registry" DApp. This distributed app runs on the Ethereum blockchain network and holds a registry of documents as Solidity smart contract.
+        <h1>Co-curricular Records and Certificate Registry</h1>
+        Welcome to the Co-curricular Records and Certificate Registry DApp. This decentralized app runs on the Ropsten TestNet blockchain network and holds records of co-curricular activities and registry of certificates as Solidity smart contract.
         <ul>
-            <li>The registry keeps images of documents along with their publish date.</li>
-            <li><b>Contract owner</b> can submit new documents to be stored on the blockchain.</li>
-            <li><b>Users</b> can view the existence of certain documents in the registry.</li>
+            <li>The registry keeps records and hashes of certificates along with their publish date.</li>
+            <li>The certificates are stored on IPFS.</li>
+            <li><b>Contract owner</b> can submit new records and certificates to be stored on the blockchain.</li>
+            <li><b>Users</b> can view the records and certificates.</li>
         </ul>
+    </section>
+
+    <section id="viewCreateRecord">
+        <h1>Create Record</h1>
+        Fill in this form to create a record of student's co-curricular activity participation
+        <p>Name: <input type="text" placeholder="Enter name" name="student_name" id="student_name" required> </p> 
+        <p>Student id: <input type="text" placeholder="Enter ID" name="student_id" id="student_id" required></p>
+        <p>Activity: <input type="text" placeholder="Enter activity" name="activity" id="activity" required></p>
+        <p>Role: <input type="text" placeholder="Enter role" name="role" id="role" required></p>
+        <p>Date: <input type="date" placeholder="Enter date" name="date" id="date" required></p>
+        <input type="button" id="createRecordButton" value="Submit" />
+    </section>
+
+    <section id="viewGetRecords">
+        <h1>View Records</h1>
+        <p>Student co-curricular activity participation records</p>
+        
     </section>
 
     <section id="viewSubmitDocument">
         <h1>Submit a Document</h1>
-        <p>Contract owners can register (upload) new documents to the "Document Registry" smart contract on the Ethereum blockchain decentralized network.</p>
+        <p>Contract owners can register (upload) new certificates to the smart contract on the Ropsten TestNet.</p>
         <input type="file" id="documentForUpload" /><br/>
         <input type="button" id="documentUploadButton" value="Submit" />
     </section>
 
     <section id="viewGetDocuments">
         <h1>View Documents</h1>
-        <p>Blockchain users can view documents in the registry on the Ethereum network.</p>
+        <p>Blockchain users can view documents in the registry on the Ropsten TestNet</p>
     </section>
 </main>
 
-<footer>Document Registry - JavaScript & Ethereum DApp</footer>
+<footer>Co-curricular Records and Certificate Registry - JavaScript & Ethereum DApp</footer>
 </body>
 </html>

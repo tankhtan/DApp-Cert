@@ -6,7 +6,16 @@ contract DocumentRegistry {
     uint256 dateAdded;
   }
   
+  struct Student {
+    string name;
+    string id;
+    string activity;
+    string role;
+    uint256 date;
+  }
+  
   Document[] private documents;
+  Student[] private students;
   address contractOwner;
   
   modifier onlyOwner() {
@@ -32,4 +41,22 @@ contract DocumentRegistry {
     return (document.hash, document.dateAdded);
   }
   
+  function createRecord(string name, string id, string activity, string role) public onlyOwner {
+    uint date = block.timestamp;
+    students.push(Student(name,id,activity,role,date));
+  }
+  
+  function getStudentsCount() public view returns (uint length) {
+    length = students.length;
+  }
+  
+  function getStudent(uint index) public view returns (string, string, string, string, uint) {
+    if ((index >= 0) && (index < students.length)) {
+      Student memory student = students[index];
+      return (student.name, student.id, student.activity, student.role, student.date);
+    }
+    else {
+      return ("Array index out of range"," "," ", " ", 0);
+    }
+  }
 }
